@@ -35,7 +35,3 @@ def cnn():
 
     RAWmodel.evaluate(x_test, y_test)
     return
-
-
-if __name__ == '__main__':
-    cnn()

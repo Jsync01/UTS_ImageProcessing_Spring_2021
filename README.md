@@ -9,4 +9,9 @@
 6. Download and place these pre-processed datasets into the same folder
     - [nist_labels_32x32.npy](https://drive.google.com/file/d/1IShRUWZBsqUVaXeCvRtw-vaygkl-fS4u/view?usp=sharing)
     - [nist_images_32x32.npy](https://drive.google.com/file/d/1G0I4A44psw2PsP_zzQBYikSoFSEmjz4f/view?usp=sharing)
-7. Run the file `python model_creation.py` with one argument (model type): `raw` `lbp` `hog`
+7. Run the file `python main.py` with one argument (model type): `cnn` `dbn` `tree` `lbp` `hog`
+    - `cnn` for Convuluted Neural Network
+    - `dbn` for Deep Belief Network
+    - `tree` for Decision Tree Classifier
+    - `lbp` for Local Binary Patterns
+    - `hog` for Historgram of Oriented Gradient

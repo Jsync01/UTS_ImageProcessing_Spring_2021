@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+nist_images_32x32.npy
+nist_labels_32x32.npy
+
 # Distribution / packaging
 .Python
 build/

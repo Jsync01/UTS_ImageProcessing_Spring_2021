@@ -1,7 +1,8 @@
-from skimage import feature
-import numpy as np
+import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation
+import numpy as np
+from skimage import feature
 
 from shared import log, loadData
 

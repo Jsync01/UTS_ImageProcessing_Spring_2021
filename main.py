@@ -16,5 +16,14 @@ elif(modelType == 'lbp'):
 elif(modelType == 'hog'):
     from other import hogModel
     hogModel()
+elif(modelType == 'knn'):
+    from knn import knn
+    knn()
+elif(modelType == 'lbpknn'):
+    from knn import lbpknn
+    lbpknn()
+elif(modelType == 'hogknn'):
+    from knn import hogknn
+    hogknn()
 else:
     print('Model type not recognised')

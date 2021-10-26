@@ -36,17 +36,23 @@ def lbpModel():
         LBPlabels_test.append(y_test[img_index])
         LBPdata_test.append(hist)
 
-    LBPvalid_images = LBPdata_train[:5000] / 255.0
-    LBPvalid_labels = LBPlabels_train[:5000]
+    LBPdata_train = np.asarray(LBPdata_train)
+    LBPlabels_train = np.asarray(LBPlabels_train)
+    LBPdata_test = np.asarray(LBPdata_test)
+    LBPlabels_test = np.asarray(LBPlabels_test)
 
-    LBPtrain_images = LBPdata_train[5000:] / 255.0
-    LBPtrain_labels = LBPlabels_train[5000:]
+    
+    LBPdata_train = LBPdata_train / 255.0
+    LBPdata_test = LBPdata_test / 255.0
     
     log("Extracted test data")
     
     LBPmodel = Sequential()
+
     LBPmodel.add(Dense(512))
+
     LBPmodel.add(Dropout(0.2))
+    LBPmodel.add(Dense(256))
 
     LBPmodel.add(Dense(47))
 
@@ -60,7 +66,7 @@ def lbpModel():
     print(np.shape(LBPlabels_train))
     print(np.shape(LBPlabels_test))
 
-    LBPmodel.fit(LBPtrain_images, LBPtrain_labels, batch_size=128, epochs=10, validation_data=(LBPvalid_images, LBPvalid_labels))
+    LBPmodel.fit(LBPdata_train, LBPlabels_train, batch_size=128, epochs=10, validation_split=0.1)
     LBPmodel.evaluate(LBPdata_test, LBPlabels_test)
 
     return
@@ -68,6 +74,8 @@ def lbpModel():
 
 # Histogram of Oriented Gradient
 def hogModel():
+    
+    log("Running Histogram of Oriented Gradients Model")
     x_train, x_test, y_train, y_test = loadData()
     log("Extracting features from training dataset...")
     HOGdata_train = []
@@ -99,17 +107,19 @@ def hogModel():
 
     log("Extracted test data")
 
-    HOGANNdata_train = np.asarray(HOGdata_train)
-    HOGANNlabels_train = np.asarray(HOGlabels_train)
-    HOGANNdata_test = np.asarray(HOGdata_test)
-    HOGANNlabels_test = np.asarray(HOGlabels_test)
+    HOGdata_train = np.asarray(HOGdata_train)
+    HOGlabels_train = np.asarray(HOGlabels_train)
+    HOGdata_test = np.asarray(HOGdata_test)
+    HOGlabels_test = np.asarray(HOGlabels_test)
 
-    HOGANNdata_train = HOGANNdata_train/255.0
-    HOGANNdata_test = HOGANNdata_test/255.0
+    HOGdata_train = HOGdata_train / 255.0
+    HOGdata_test = HOGdata_test / 255.0
 
     HOGmodel = Sequential()
     HOGmodel.add(Dense(512))
+
     HOGmodel.add(Dropout(0.2))
+    HOGmodel.add(Dense(256))
 
     HOGmodel.add(Dense(47))
 
@@ -118,8 +128,8 @@ def hogModel():
     HOGmodel.compile(loss="sparse_categorical_crossentropy", optimizer=tf.keras.optimizers.Adam(0.001), metrics=['accuracy'])
     log("Compiled Model")
 
-    HOGmodel.fit(HOGANNdata_train, HOGANNlabels_train, batch_size=128, epochs=10, validation_split=0.1)
-    HOGmodel.evaluate(HOGANNdata_test, HOGANNlabels_test)
+    HOGmodel.fit(HOGdata_train, HOGlabels_train, batch_size=128, epochs=10, validation_split=0.1)
+    HOGmodel.evaluate(HOGdata_test, HOGlabels_test)
 
     return
 

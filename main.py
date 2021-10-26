@@ -14,7 +14,7 @@ elif(modelType == 'lbp'):
     from other import lbpModel
     lbpModel()
 elif(modelType == 'hog'):
-    from other import lbpModel
-    lbpModel()
+    from other import hogModel
+    hogModel()
 else:
     print('Model type not recognised')

@@ -24,9 +24,9 @@ def loadData():
     train_labels = labels[:split]
     test_imgs = images[split:]
     test_labels = labels[split:]
-    x_train = train_imgs/255.0
-    x_test = test_imgs/255.0
+    #x_train = train_imgs/255.0
+    #x_test = test_imgs/255.0
     y_train = train_labels.astype('float64')
     y_test = test_labels.astype('float64')
     log("Performed train-test split with 0.7/0.3")
-    return x_train, x_test, y_train, y_test
+    return train_imgs, test_imgs, y_train, y_test

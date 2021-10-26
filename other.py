@@ -9,6 +9,7 @@ from shared import log, loadData
 # Local Binary Patterns
 def lbpModel():
     x_train, x_test, y_train, y_test = loadData()
+    log("Running Local Binary Patterns Model")
     desc = LocalBinaryPatterns(24, 8)
     LBPdata_train = []
     LBPlabels_train = []
@@ -60,8 +61,9 @@ def lbpModel():
     print(np.shape(LBPlabels_test))
 
     LBPmodel.fit(LBPtrain_images, LBPtrain_labels, batch_size=128, epochs=10, validation_data=(LBPvalid_images, LBPvalid_labels))
-
     LBPmodel.evaluate(LBPdata_test, LBPlabels_test)
+
+    return
 
 
 # Histogram of Oriented Gradient
@@ -117,8 +119,9 @@ def hogModel():
     log("Compiled Model")
 
     HOGmodel.fit(HOGANNdata_train, HOGANNlabels_train, batch_size=128, epochs=10, validation_split=0.1)
-
     HOGmodel.evaluate(HOGANNdata_test, HOGANNlabels_test)
+
+    return
 
 
 class LocalBinaryPatterns:

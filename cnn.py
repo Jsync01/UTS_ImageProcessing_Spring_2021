@@ -4,8 +4,10 @@ from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D,
 
 from shared import log, loadData
 
+# Convoluted Neural Network
 def cnn():
     x_train, x_test, y_train, y_test = loadData()
+    log("Running Convoluted Neural Network Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(16, (3,3), input_shape = x_train.shape[1:]))
     RAWmodel.add(Activation("relu"))

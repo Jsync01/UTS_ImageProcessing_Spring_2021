@@ -4,6 +4,12 @@ modelType = sys.argv[-1]
 if(modelType == 'cnn'):
     from cnn import cnn
     cnn()
+elif(modelType == 'alexnet'):
+    from cnn import adapted_alexnet_cnn
+    adapted_alexnet_cnn()
+elif(modelType == 'lenet'):
+    from cnn import lenet_cnn
+    lenet_cnn()
 elif(modelType == "dbn"):
     from dbn import deepBeliefNetwork
     deepBeliefNetwork()

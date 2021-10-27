@@ -22,15 +22,15 @@ def cnn():
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(16, (3,3), input_shape = x_train.shape[1:]))
     RAWmodel.add(Activation("relu"))
-    RAWmodel.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    RAWmodel.add(MaxPooling2D(pool_size=(2,2)))
 
     RAWmodel.add(Conv2D(32, (3,3)))
     RAWmodel.add(Activation("relu"))
-    RAWmodel.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    RAWmodel.add(MaxPooling2D(pool_size=(2,2)))
 
     RAWmodel.add(Conv2D(64, (3,3)))
     RAWmodel.add(Activation("relu"))
-    RAWmodel.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
+    RAWmodel.add(MaxPooling2D(pool_size=(2,2)))
 
     RAWmodel.add(Flatten())
     RAWmodel.add(Dense(512))
@@ -62,7 +62,7 @@ def adapted_alexnet_cnn():
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
-    log("Running Convolutional Neural Network Model")
+    log("Running Alex Net CNN Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(24, (5,5), input_shape = x_train.shape[1:], padding='same', activation='relu'))
     RAWmodel.add(MaxPooling2D(pool_size=(2,2)))
@@ -102,7 +102,7 @@ def lenet_cnn():
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
-    log("Running Convolutional Neural Network Model")
+    log("Running Lenet CNN Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(6, (5,5), strides=(1,1), activation='tanh', input_shape = x_train.shape[1:], padding='same'))
     RAWmodel.add(AveragePooling2D(pool_size=(2,2), strides=(1,1), padding='valid'))

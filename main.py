@@ -19,17 +19,19 @@ elif(modelType == "tree"):
     from tree import decisionTree
     decisionTree()
 
-elif(modelType == "dbn"):
-    from dbn import deepBeliefNetwork
-    deepBeliefNetwork()
-
-elif(modelType == 'lbp'):
-    from other import lbpModel
-    lbpModel()
-
-elif(modelType == 'hog'):
-    from other import hogModel
-    hogModel()
+elif(modelType == 'ann'):
+    knnType = input("Which model to use for ann [raw] [lbp] [hog] ")
+    if(knnType == 'raw'):
+        from ann import ann
+        ann()
+    elif(knnType == 'lbp'):
+        from ann import lbpann
+        lbpann()
+    elif(knnType == 'hog'):
+        from ann import hogann
+        hogann()
+    else:
+        print("Incorrect choice, try again.")
 
 elif(modelType == 'knn'):
     knnType = input("Which model to use for knn [normal] [lbp] [hog] ")

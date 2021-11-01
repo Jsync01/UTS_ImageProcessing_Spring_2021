@@ -37,8 +37,8 @@ def knn():
 
     return
 
+# Histogram of Oriented Gradient
 def hogknn():
-    
     log("Running Histogram of Oriented Gradients with knn")
     x_train, x_test, y_train, y_test = loadData()
     log("Extracting features from training dataset...")
@@ -90,7 +90,7 @@ def hogknn():
 
     return
 
-
+# Local Binary Patterns
 def lbpknn():
     x_train, x_test, y_train, y_test = loadData()
     log("Running Local Binary Patterns Model")
@@ -138,9 +138,6 @@ def lbpknn():
     log(f'test set accuracy:  {acc_test}')
 
     return
-
-
-
 
 class LocalBinaryPatterns:
     def __init__(self, numPoints, radius):

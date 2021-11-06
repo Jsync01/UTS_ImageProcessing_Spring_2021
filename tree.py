@@ -1,7 +1,11 @@
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.metrics import accuracy_score
+from graphviz import Source
+import os
 
 from shared import log, loadData
+
+os.environ["PATH"] += os.pathsep + 'C:/Program Files/Graphviz/bin/'
 
 # Decision Tree Classifier
 def decisionTree():
@@ -22,5 +26,10 @@ def decisionTree():
 
     log(f'Accuracy Score on train data: {round(accuracy_score(y_true=y_train, y_pred=model.predict(x_train)),3)}')
     log(f'Accuracy Score on the test data: {round(accuracy_score(y_true=y_test, y_pred=model.predict(x_test)),3)}')
+    
+    log("Generating illustration")
+    graph = Source(export_graphviz(model, out_file=None, filled=True, max_depth=2))
+    graph.format="png"
+    graph.render('tree', view=True)
 
     return

@@ -8,6 +8,8 @@ __pycache__/
 
 nist_images_32x32.npy
 nist_labels_32x32.npy
+tree
+tree.png
 
 # Distribution / packaging
 .Python

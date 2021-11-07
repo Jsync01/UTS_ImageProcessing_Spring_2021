@@ -1,3 +1,4 @@
+# Written by Christopher Chang - 13872460
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 import numpy as np
@@ -15,15 +16,17 @@ def knn():
     print(np.shape(x_train))
     print(np.shape(x_test))
 
+    #reshaping the dataset
     samples, x, y, u = x_train.shape
     Xtrain = x_train.reshape((samples,x*y))
     t_samples, t_x, t_y, u = x_test.shape
     Xtest = x_test.reshape((t_samples,t_x*t_y))
 
+    #printing the dataset shape
     print(np.shape(Xtrain))
     print(np.shape(Xtest))
 
-    #Neirest neighbours classifier with 7 neighbours
+    #Nearest neighbours classifier with 7 neighbours
     clf = KNeighborsClassifier(n_neighbors=7)
     clf.fit(Xtrain, y_train.ravel())
 
@@ -47,10 +50,11 @@ def hogknn():
     HOGdata_test = []
     HOGlabels_test = []
 
-    #Extracting features from train dataset
+    #Extracting features from train dataset using hog
     for img_index in range(len(x_train)):
         image = x_train[img_index]
         
+        #setting up hog feature parameters
         H = feature.hog(image, orientations=9, pixels_per_cell=(10, 10), cells_per_block=(2,2),
                         transform_sqrt=True, block_norm="L2-Hys") # Complete the code 
         
@@ -59,10 +63,11 @@ def hogknn():
     
     log("Extracted train data")
 
-    #Extracting features from test dataset
+    #Extracting features from test dataset using hog
     for img_index in range(len(x_test)):
         image = x_test[img_index]
         
+        #setting up hog feature parameters
         H = feature.hog(image, orientations=9, pixels_per_cell=(10, 10), cells_per_block=(2,2),
                         transform_sqrt=True, block_norm="L2-Hys") # Complete the code 
         
@@ -76,15 +81,19 @@ def hogknn():
     HOGdata_test = np.asarray(HOGdata_test)
     HOGlabels_test = np.asarray(HOGlabels_test)
 
+    #printing shape of dataset
     print(np.shape(HOGdata_train))
     print(np.shape(HOGdata_test))
 
+    #fitting hog feature into knn classifier
     clf = KNeighborsClassifier(n_neighbors=7)
     clf.fit(HOGdata_train, HOGlabels_train.ravel())
 
+    #train accuracy
     acc_train = clf.score(HOGdata_train, HOGlabels_train)
     log(f'train set accuracy: {acc_train}')
 
+    #test accuracy
     acc_test = clf.score(HOGdata_test, HOGlabels_test)
     log(f'test set accuracy:  {acc_test}')
 
@@ -103,6 +112,7 @@ def lbpknn():
     x_train = np.array(x_train[:,:,:,0])
     x_test = np.array(x_test[:,:,:,0])
 
+    #extracting lbp features from training set
     log("Extracting features from training dataset...")
     for img_index in range(len(x_train)):
         image = x_train[img_index]
@@ -111,6 +121,7 @@ def lbpknn():
         LBPlabels_train.append(y_train[img_index])
         LBPdata_train.append(hist)
     
+    #extracting lbp features from testing set
     log("Extracted train data")
     for img_index in range(len(x_test)):
         
@@ -125,20 +136,25 @@ def lbpknn():
     LBPdata_test = np.asarray(LBPdata_test)
     LBPlabels_test = np.asarray(LBPlabels_test)
 
+    #printing shape
     print(np.shape(LBPdata_train))
     print(np.shape(LBPdata_test))
 
+    #fitting lbp feature into knn
     clf = KNeighborsClassifier(n_neighbors=7)
     clf.fit(LBPdata_train, LBPlabels_train.ravel())
 
+    #printing training accuracy
     acc_train = clf.score(LBPdata_train, LBPlabels_train)
     log(f'train set accuracy: {acc_train}')
 
+    #printing testing accuracy
     acc_test = clf.score(LBPdata_test, LBPlabels_test)
     log(f'test set accuracy:  {acc_test}')
 
     return
 
+#lbp feature extraction
 class LocalBinaryPatterns:
     def __init__(self, numPoints, radius):
         self.numPoints = numPoints

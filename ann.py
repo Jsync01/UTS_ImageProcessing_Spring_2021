@@ -21,7 +21,7 @@ def ann():
     print(np.shape(train_images))
     print(np.shape(test_images))
     
-
+# Defining dense layers
     modelANN = tf.keras.models.Sequential([tf.keras.layers.Flatten(input_shape=[32,32]),
                                     tf.keras.layers.Dense(4096, activation=tf.nn.relu), 
                                     tf.keras.layers.Dense(4096, activation=tf.nn.relu), 
@@ -30,7 +30,7 @@ def ann():
                                     tf.keras.layers.Dense(47, activation=tf.nn.softmax)])
 
     modelANN.compile(optimizer = tf.optimizers.Adam(),loss = 'sparse_categorical_crossentropy',metrics=['accuracy'])
-
+# Defining the amount of epochs that will be calculated currently we have 10
     H=modelANN.fit(train_images, train_labels, epochs=10, validation_split=(0.1))
 
     modelANN.evaluate(test_images, test_labels)
@@ -53,7 +53,7 @@ def lbpann():
 
     x_train = np.array(x_train[:,:,:,0])
     x_test = np.array(x_test[:,:,:,0])
-
+# EXtracting LBP features
     log("Extracting features from training dataset...")
     for img_index in range(len(x_train)):
         image = x_train[img_index]
@@ -92,7 +92,7 @@ def lbpann():
     LBPmodel.add(Dense(47))
 
     LBPmodel.add(Activation('sigmoid'))
-
+# Inserting LBP features into ANN classifier 
     LBPmodel.compile(loss="sparse_categorical_crossentropy", optimizer=tf.keras.optimizers.Adam(0.001), metrics=['accuracy'])
     log("Compiled Model")
 

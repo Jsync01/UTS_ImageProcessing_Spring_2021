@@ -1,29 +1,26 @@
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D, AveragePooling2D
-from tensorflow.keras.activations import relu, softmax, tanh
 import numpy as np
 
 from shared import log, loadData
 
 # Convoluted Neural Network
 def cnn():
+    log("Running Convoluted Neural Network Model")
+    x_train, x_test, y_train, y_test = loadData() # Loading in data
 
-    #loading and splitting the test train data
-    x_train, x_test, y_train, y_test = loadData()
-
-    #ensuring output is in correct format
+    # Ensuring output is in correct format
     x_train = np.asarray(x_train)
     y_train = np.asarray(y_train)
     x_test = np.asarray(x_test)
     y_test = np.asarray(y_test)
 
-    #normalising data so that it ranges from 0-1 rather than 0-255
+    # Normalising data so that it ranges from 0-1 rather than 0-255
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
-
-    #creating model architecture by adding layers individually
+    # Creating model architecture by adding layers individually
     log("Running Convolutional Neural Network Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(16, (3,3), input_shape = x_train.shape[1:]))
@@ -48,35 +45,34 @@ def cnn():
 
     RAWmodel.add(Activation('sigmoid'))
 
-
-    #compiling the specified layers into a model
+    # Compiling the specified layers into a model
     RAWmodel.compile(loss="sparse_categorical_crossentropy", optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
     log("Compiled Model")
     
-    #fitting the model to the train dataset and using 20% of the train data as validation
+    # Fitting the model to the train dataset and using 20% of the train data as validation
     RAWmodel.fit(x_train, y_train, batch_size=64, epochs=10, validation_split=0.1, verbose=1)
 
-    #evaluating the model on the test dataset
+    # Evaluating the model on the test dataset
     RAWmodel.evaluate(x_test, y_test)
     return
 
 # AlexNet Convoluted Neural Network Implementation
 def adapted_alexnet_cnn():
-    #loading and splitting the test train data
-    x_train, x_test, y_train, y_test = loadData()
+    log("Running AlexNet Convoluted Neural Network Model")
+    x_train, x_test, y_train, y_test = loadData() # Loading in data
 
-    #ensuring output is in correct format
+    # Ensuring output is in correct format
     x_train = np.asarray(x_train)
     y_train = np.asarray(y_train)
     x_test = np.asarray(x_test)
     y_test = np.asarray(y_test)
 
-    #normalising data so that it ranges from 0-1 rather than 0-255
+    # Normalising data so that it ranges from 0-1 rather than 0-255
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
-    #creating model architecture by adding layers individually
-    # uses the same layer structure as the AlexNet model with different parameters
+    # Creating model architecture by adding layers individually
+    # Uses the same layer structure as the AlexNet model with different parameters
     log("Running Alex Net CNN Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(24, (5,5), input_shape = x_train.shape[1:], padding='same', activation='relu'))
@@ -97,12 +93,11 @@ def adapted_alexnet_cnn():
 
     RAWmodel.add(Dense(47, activation='softmax'))
 
-    #compiling the model
+    # Compiling the model
     RAWmodel.compile(loss="sparse_categorical_crossentropy", optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
     log("Compiled Model")
 
-
-    #fitting the model to the train dataset using 10% of the data as validation
+    # Fitting the model to the train dataset using 10% of the data as validation
     RAWmodel.fit(x_train, y_train, batch_size=64, epochs=25, validation_split=0.1)
 
     RAWmodel.evaluate(x_test, y_test)
@@ -110,21 +105,21 @@ def adapted_alexnet_cnn():
 
 # LeNet Convoluted Neural Network Implementation
 def lenet_cnn():
-    #loading and splitting the test train data
-    x_train, x_test, y_train, y_test = loadData()
+    log("Running LeNet Convoluted Neural Network Model")
+    x_train, x_test, y_train, y_test = loadData() # Loading in data
 
-    #ensuring output is in correct format
+    # Ensuring output is in correct format
     x_train = np.asarray(x_train)
     y_train = np.asarray(y_train)
     x_test = np.asarray(x_test)
     y_test = np.asarray(y_test)
 
-    #normalising data so that it ranges from 0-1 rather than 0-255
+    # Normalising data so that it ranges from 0-1 rather than 0-255
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
-    #creating model architecture by adding layers individually
-    # uses the same layer structure as the LeNet model with different parameters
+    # Creating model architecture by adding layers individually
+    # Uses the same layer structure as the LeNet model with different parameters
     log("Running Lenet CNN Model")
     RAWmodel = Sequential()
     RAWmodel.add(Conv2D(6, (5,5), strides=(1,1), activation='tanh', input_shape = x_train.shape[1:], padding='same'))
@@ -141,13 +136,13 @@ def lenet_cnn():
 
     RAWmodel.add(Dense(47, activation='softmax'))
 
-    #Compiling the model
+    # Compiling the model
     RAWmodel.compile(loss="sparse_categorical_crossentropy", optimizer='SGD', metrics=['accuracy'])
     log("Compiled Model")
 
-    #Fitting the model on the train dataset using 10% of the data as validation
+    # Fitting the model on the train dataset using 10% of the data as validation
     RAWmodel.fit(x_train, y_train, batch_size=128, epochs=10, validation_split=0.1)
 
-    #Evaluating the model on the train dataset
+    # Evaluating the model on the train dataset
     RAWmodel.evaluate(x_test, y_test)
     return

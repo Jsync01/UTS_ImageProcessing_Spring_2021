@@ -7,8 +7,6 @@ from shared import log, loadData
 
 def knn():
     log("Running K - Nearest Neighbours Model")
-    
-    # Retrieve training data
     x_train, x_test, y_train, y_test = loadData() # Loading in data
 
     print(np.shape(x_train))
@@ -41,7 +39,8 @@ def knn():
 # Histogram of Oriented Gradient
 def hogknn():
     log("Running Histogram of Oriented Gradients with knn")
-    x_train, x_test, y_train, y_test = loadData()
+    x_train, x_test, y_train, y_test = loadData() # Loading in data
+
     log("Extracting features from training dataset...")
     HOGdata_train = []
     HOGlabels_train = []
@@ -99,8 +98,9 @@ def hogknn():
 
 # Local Binary Patterns
 def lbpknn():
-    x_train, x_test, y_train, y_test = loadData()
     log("Running Local Binary Patterns Model")
+    x_train, x_test, y_train, y_test = loadData() # Loading in data
+
     desc = LocalBinaryPatterns(24, 8)
     LBPdata_train = []
     LBPlabels_train = []

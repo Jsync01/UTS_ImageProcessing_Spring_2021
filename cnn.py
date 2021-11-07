@@ -118,7 +118,6 @@ def lenet_cnn():
 
     RAWmodel.add(Dense(47, activation='softmax'))
 
-
     RAWmodel.compile(loss="sparse_categorical_crossentropy", optimizer='SGD', metrics=['accuracy'])
     log("Compiled Model")
 

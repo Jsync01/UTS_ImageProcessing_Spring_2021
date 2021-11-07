@@ -41,7 +41,6 @@ def lbpModel():
     LBPdata_test = np.asarray(LBPdata_test)
     LBPlabels_test = np.asarray(LBPlabels_test)
 
-    
     LBPdata_train = LBPdata_train / 255.0
     LBPdata_test = LBPdata_test / 255.0
     
@@ -71,7 +70,6 @@ def lbpModel():
 
     return
 
-
 # Histogram of Oriented Gradient
 def hogModel():
     log("Running Histogram of Oriented Gradients Model")
@@ -82,7 +80,7 @@ def hogModel():
     HOGdata_test = []
     HOGlabels_test = []
 
-    #Extracting features from train dataset
+    # Extracting features from train dataset
     for img_index in range(len(x_train)):
         image = x_train[img_index]
         
@@ -94,7 +92,7 @@ def hogModel():
     
     log("Extracted train data")
 
-    #Extracting features from test dataset
+    # Extracting features from test dataset
     for img_index in range(len(x_test)):
         image = x_test[img_index]
         
@@ -132,7 +130,7 @@ def hogModel():
 
     return
 
-
+# lbp feature extraction
 class LocalBinaryPatterns:
     def __init__(self, numPoints, radius):
         self.numPoints = numPoints
